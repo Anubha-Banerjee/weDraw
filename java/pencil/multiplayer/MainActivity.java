@@ -539,8 +539,7 @@ public class MainActivity extends Activity
     // Called when room has been created
     @Override
     public void onRoomCreated(int statusCode, Room room) {
-    	GameActivity.scoreCount = 0;
-    	GameActivity.opponentScoreCount = 0;
+
         Log.d(TAG, "onRoomCreated(" + statusCode + ", " + room + ")");
         if (statusCode != GamesStatusCodes.STATUS_OK) {
             Log.e(TAG, "*** Error: onRoomCreated, status " + statusCode);
@@ -656,7 +655,7 @@ public class MainActivity extends Activity
     void startGame(boolean multiplayer) {
         mMultiplayer = multiplayer;            
         switchToScreen(R.id.screen_game);
-        this.startActivity(new Intent(this, GameActivity.class));        
+        setContentView( new GameActivity(this));    	      
     }
 
     /*
@@ -686,7 +685,7 @@ public class MainActivity extends Activity
         float[] floatArray = toFloatArray(buf);
         float opponentX = floatArray[0];
         float opponentY = floatArray[1];
-        GameActivity.opponentEvent(opponentX, opponentY);        
+       // GameActivity.opponentEvent(opponentX, opponentY);        
     }
 	private static float[] toFloatArray(byte[] bytes) {
 		float floatArray[] = new float[bytes.length/4];
